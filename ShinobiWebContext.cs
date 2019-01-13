@@ -10,9 +10,6 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Sample.ShinobiVideo.Lib
 {
-	/// <summary>
-	/// Apis for liveview
-	/// </summary>
     public static class ShinobiWebContext
     {
         private static volatile Dictionary<string, ShinobiMonitoringVm> CameraLastRequestTime ;

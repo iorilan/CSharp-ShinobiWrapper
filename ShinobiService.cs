@@ -9,9 +9,6 @@ using Newtonsoft.Json;
 
 namespace Sample.ShinobiVideo.Lib
 {
-	/// <summary>
-	/// A wrapper of shinobi video apis
-	/// </summary>
 	public static class ShinobiService
 	{
 		private static ILog _log = LogManager.GetLogger(typeof(ShinobiService));
@@ -36,9 +33,7 @@ namespace Sample.ShinobiVideo.Lib
 			}
 
 		}
-		/*
-         * Live view
-         */
+
 		public static bool AddCamera(CameraVm camera)
 		{
 			try
@@ -105,9 +100,6 @@ namespace Sample.ShinobiVideo.Lib
 
 
 
-		/*
-         * Snapshot & Video clip
-         */
 		public static ShinobiResponseVideoFileVm GetVideoFilesBeforeWhen(string ip, DateTime datetime)
 		{
 			var dtStr = datetime.ToString("yyyy-MM-ddTHH:mm:ss");
@@ -158,11 +150,6 @@ namespace Sample.ShinobiVideo.Lib
 			}
 		}
 
-		/// <summary>
-		/// This is called by a batchjob every 1 minute .make sure only record 10 minutes video
-		/// </summary>
-		/// <param name="vm"></param>
-		/// <returns></returns>
 		public static bool DeleteVideoFile(ShinobiResponseVideoVm vm)
 		{
 			try
@@ -188,11 +175,6 @@ namespace Sample.ShinobiVideo.Lib
 			}
 		}
 
-		/// <summary>
-		/// Make sure the jepg api is enabled on shinobi
-		/// </summary>
-		/// <param name="camera"></param>
-		/// <returns></returns>
 		public static byte[] GetSnapshot(Camera camera)
 		{
 			try

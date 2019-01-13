@@ -123,23 +123,11 @@ namespace Sample.ShinobiVideo.Lib
 						{
 							var videos = videoResp.videos;
 
-							////first video : sort by desc , take the latest one after event time
-							////second video: sort by asc, take next after first video
-
-
 							var theVideo = videoIndex == 1 ? videos.OrderByDescending(x => x.time).FirstOrDefault() : videos.OrderBy(x => x.time).FirstOrDefault();
 							if (theVideo != null)
 							{
 								var startTime = DateTime.Parse(theVideo.time);
 								var endtime = DateTime.Parse(theVideo.end);
-								////first video : video end time must after event time
-								////second video : video start time must before first video end time
-								////|-------------------------time line--------------------------|
-								////|first video time|
-								////				 |second video time|
-								////			|event time|
-								////				 |->query :first video end time must before here
-								////				  |->query :2nd video start time must after here
 								var timePointOfVideoWindow = videoIndex == 1 ? endtime : startTime;
 
 								if (videoIndex == 1 && timePointOfVideoWindow < videoTime)
@@ -164,9 +152,6 @@ namespace Sample.ShinobiVideo.Lib
 							}
 						}
 
-						//// request may come from liveview or virtual patrol or map .they are recording & streaming on demand
-						//// shinobi just started recording, takes time to be ready .
-						//// but for the video channels like VCA or door , always recording
 						retried++;
 						_log.Info($"[Get video clip shinobi] didnt get it {ip} {path}.retrying {retried} times");
 						await Task.Delay(1000);
